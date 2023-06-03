@@ -62,6 +62,7 @@
                                 data-uri="{% url 'pybo:comment_delete_question' comment.id  %}">삭제</a>
                                 {% endif %}
                             </div>
+                            <!-- 질문 댓글 추천 -->
                             <div>
                                 <a href="javascript:void(0)" data-uri="{% url 'pybo:vote_question_comment' comment.id  %}"
                                     class="recommend emoji"> 👍🏻
@@ -133,6 +134,7 @@
                                 data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
                                 {% endif %}
                             </div>
+                            <!-- 답변 댓글 추천 -->
                             <div>
                                 <a href="javascript:void(0)" data-uri="{% url 'pybo:vote_answer_comment' comment.id  %}"
                                     class="recommend emoji"> 👍🏻
