@@ -47,21 +47,29 @@
                     <div class="mt-3">
                     {% for comment in question.comment_set.all %}
                         <a name="comment_{{ comment.id }}"></a>
-                        <div class="comment py-2 text-muted">
-                            <span style="white-space: pre-line;">{{ comment.content }}</span>
-                            <span>
-                                - {{ comment.author }}, {{ comment.create_date }}
-                                {% if comment.modify_date %}
-                                (수정:{{ comment.modify_date }})
+                        <div class="comment py-2 text-muted d-flex justify-content-between ">
+                            <div>
+                                <span style="white-space: pre-line;">{{ comment.content }}</span>
+                                <span>
+                                    - {{ comment.author }}, {{ comment.create_date }}
+                                    {% if comment.modify_date %}
+                                    (수정:{{ comment.modify_date }})
+                                    {% endif %}
+                                </span>
+                                {% if request.user == comment.author %}
+                                <a href="{% url 'pybo:comment_modify_question' comment.id  %}" class="small">수정</a>,
+                                <a href="#" class="small delete"
+                                data-uri="{% url 'pybo:comment_delete_question' comment.id  %}">삭제</a>
                                 {% endif %}
-                            </span>
-                            {% if request.user == comment.author %}
-                            <a href="{% url 'pybo:comment_modify_question' comment.id  %}" class="small">수정</a>,
-                            <a href="#" class="small delete"
-                               data-uri="{% url 'pybo:comment_delete_question' comment.id  %}">삭제</a>
-                            {% endif %}
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)" data-uri="{% url 'pybo:vote_question_comment' comment.id  %}"
+                                    class="recommend emoji"> 👍🏻
+                                    <span class="badge rounded-pill ">{{comment.voter.count}}</span>
+                                </a>
+                            </div>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
                     </div>
                     {% endif %}
                     <div>
@@ -110,19 +118,27 @@
                     <div class="mt-3">
                     {% for comment in answer.comment_set.all %}
                         <a name="comment_{{ comment.id }}"></a>
-                        <div class="comment py-2 text-muted">
-                            <span style="white-space: pre-line;">{{ comment.content }}</span>
-                            <span>
-                                - {{ comment.author }}, {{ comment.create_date }}
-                                {% if comment.modify_date %}
-                                (수정:{{ comment.modify_date }})
+                        <div class="comment py-2 text-muted d-flex justify-content-between">
+                            <div>
+                                <span style="white-space: pre-line;">{{ comment.content }}</span>
+                                <span>
+                                    - {{ comment.author }}, {{ comment.create_date }}
+                                    {% if comment.modify_date %}
+                                    (수정:{{ comment.modify_date }})
+                                    {% endif %}
+                                </span>
+                                {% if request.user == comment.author %}
+                                <a href="{% url 'pybo:comment_modify_answer' comment.id  %}" class="small">수정</a>,
+                                <a href="#" class="small delete"
+                                data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
                                 {% endif %}
-                            </span>
-                            {% if request.user == comment.author %}
-                            <a href="{% url 'pybo:comment_modify_answer' comment.id  %}" class="small">수정</a>,
-                            <a href="#" class="small delete"
-                               data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
-                            {% endif %}
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)" data-uri="{% url 'pybo:vote_answer_comment' comment.id  %}"
+                                    class="recommend emoji"> 👍🏻
+                                    <span class="badge rounded-pill ">{{comment.voter.count}}</span>
+                                </a>
+                            </div>
                         </div>
                     {% endfor %}
                     </div>
