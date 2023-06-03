@@ -56,6 +56,14 @@
                                     (수정:{{ comment.modify_date }})
                                     {% endif %}
                                 </span>
+                                <span>
+                                    {% if comment.modify_count %}
+                                     [ 
+                                     <span style="font-weight: bold; color: black;">
+                                        {{ comment.modify_count }}번
+                                     </span> 수정됨 ]
+                                    {% endif %}
+                                </span>
                                 {% if request.user == comment.author %}
                                 <a href="{% url 'pybo:comment_modify_question' comment.id  %}" class="small">수정</a>,
                                 <a href="#" class="small delete"
@@ -125,6 +133,14 @@
                                     - {{ comment.author }}, {{ comment.create_date }}
                                     {% if comment.modify_date %}
                                     (수정:{{ comment.modify_date }})
+                                    {% endif %}
+                                </span>
+                                <span>
+                                    {% if comment.modify_count %}
+                                     [ 
+                                     <span style="font-weight: bold; color: black;">
+                                        {{ comment.modify_count }}번
+                                     </span> 수정됨 ]
                                     {% endif %}
                                 </span>
                                 {% if request.user == comment.author %}
