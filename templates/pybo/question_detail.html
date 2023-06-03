@@ -69,12 +69,14 @@
                                 <a href="#" class="small delete"
                                 data-uri="{% url 'pybo:comment_delete_question' comment.id  %}">삭제</a>
                                 {% endif %}
-                            </span>
-                            {% if request.user == comment.author %}
-                            <a href="{% url 'pybo:comment_modify_question' comment.id  %}" class="small">수정</a>,
-                            <a href="#" class="small delete"
-                               data-uri="{% url 'pybo:comment_delete_question' comment.id  %}">삭제</a>
-                            {% endif %}
+                            </div>
+                            <!-- 질문 댓글 추천 -->
+                            <div>
+                                <a href="javascript:void(0)" data-uri="{% url 'pybo:vote_question_comment' comment.id  %}"
+                                    class="recommend emoji"> 👍🏻
+                                    <span class="badge rounded-pill ">{{comment.voter.count}}</span>
+                                </a>
+                            </div>
                         </div>
                     {% endfor %}
                     </div>
@@ -147,12 +149,23 @@
                                 <a href="#" class="small delete"
                                 data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
                                 {% endif %}
+<<<<<<< HEAD
                             </span>
                             {% if request.user == comment.author %}
                             <a href="{% url 'pybo:comment_modify_answer' comment.id  %}" class="small">수정</a>,
                             <a href="#" class="small delete"
                                data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
                             {% endif %}
+=======
+                            </div>
+                            <!-- 답변 댓글 추천 -->
+                            <div>
+                                <a href="javascript:void(0)" data-uri="{% url 'pybo:vote_answer_comment' comment.id  %}"
+                                    class="recommend emoji"> 👍🏻
+                                    <span class="badge rounded-pill ">{{comment.voter.count}}</span>
+                                </a>
+                            </div>
+>>>>>>> feature/recommend
                         </div>
                     {% endfor %}
                     </div>
