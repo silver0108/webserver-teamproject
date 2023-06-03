@@ -149,14 +149,6 @@
                                 <a href="#" class="small delete"
                                 data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
                                 {% endif %}
-<<<<<<< HEAD
-                            </span>
-                            {% if request.user == comment.author %}
-                            <a href="{% url 'pybo:comment_modify_answer' comment.id  %}" class="small">수정</a>,
-                            <a href="#" class="small delete"
-                               data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
-                            {% endif %}
-=======
                             </div>
                             <!-- 답변 댓글 추천 -->
                             <div>
@@ -165,7 +157,6 @@
                                     <span class="badge rounded-pill ">{{comment.voter.count}}</span>
                                 </a>
                             </div>
->>>>>>> feature/recommend
                         </div>
                     {% endfor %}
                     </div>
