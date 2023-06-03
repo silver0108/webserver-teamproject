@@ -34,7 +34,7 @@ def vote_answer(request, answer_id):
 @login_required(login_url='common:login')
 def vote_question_comment(request, comment_id):
     """
-    pybo 질문댓글추천등록
+    pybo 질문 댓글 추천등록
     """
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user == comment.author:
@@ -46,7 +46,7 @@ def vote_question_comment(request, comment_id):
 @login_required(login_url='common:login')
 def vote_answer_comment(request, comment_id):
     """
-    pybo 답변댓글추천등록
+    pybo 답변 댓글 추천등록
     """
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user == comment.author:
