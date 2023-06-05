@@ -45,17 +45,18 @@ def detail(request, question_id):
     """
     question = get_object_or_404(Question, pk=question_id)
     page = request.GET.get('page', '1') # 댓글 페이지
+    # comment_list = Comment.objects.filter(question=question).order_by('-create_date') # 해당 질문에 대한 댓글들만
     so = request.GET.get('so', 'recent')  # 댓글 정렬 기준
 
     # 댓글 정렬
     if so == 'recommend':
-        comment_list = Comment.objects.annotate(num_voter=Count('voter')).order_by('-num_voter', '-create_date')
+        comment_list = Comment.objects.filter(question=question).annotate(num_voter=Count('voter')).order_by('-num_voter', '-create_date')
     else:  # recent
-        comment_list = Comment.objects.order_by('-create_date')
+        comment_list = Comment.objects.filter(question=question).order_by('-create_date')
 
     # 댓글 페이징
-    paginator = Paginator(comment_list, 10)
+    paginator = Paginator(comment_list, 5)
     page_obj = paginator.get_page(page)
 
-    context = {'question': question, 'comment_list': page_obj, 'so': so}
+    context = {'question': question, 'comment_list': page_obj, 'page': page, 'so': so}
     return render(request, 'pybo/question_detail.html', context)
