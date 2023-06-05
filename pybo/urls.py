@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import base_views, question_views, answer_views, comment_views, vote_views
+from .views import base_views, question_views, answer_views, comment_question_views, comment_answer_views, vote_views
+
 
 app_name = 'pybo'
 
@@ -19,13 +20,15 @@ urlpatterns = [
     path('answer/modify/<int:answer_id>/', answer_views.answer_modify, name='answer_modify'),
     path('answer/delete/<int:answer_id>/', answer_views.answer_delete, name='answer_delete'),
 
-    # comment_views.py
-    path('comment/create/question/<int:question_id>/', comment_views.comment_create_question, name='comment_create_question'),
-    path('comment/modify/question/<int:comment_id>/', comment_views.comment_modify_question, name='comment_modify_question'),
-    path('comment/delete/question/<int:comment_id>/', comment_views.comment_delete_question, name='comment_delete_question'),
-    path('comment/create/answer/<int:answer_id>/', comment_views.comment_create_answer, name='comment_create_answer'),
-    path('comment/modify/answer/<int:comment_id>/', comment_views.comment_modify_answer, name='comment_modify_answer'),
-    path('comment/delete/answer/<int:comment_id>/', comment_views.comment_delete_answer, name='comment_delete_answer'),
+    # comment_question_views.py
+    path('comment/create/question/<int:question_id>/', comment_question_views.comment_create_question, name='comment_create_question'),
+    path('comment/modify/question/<int:comment_id>/', comment_question_views.comment_modify_question, name='comment_modify_question'),
+    path('comment/delete/question/<int:comment_id>/', comment_question_views.comment_delete_question, name='comment_delete_question'),
+
+    # comment_answer_views.py
+    path('comment/create/answer/<int:answer_id>/', comment_answer_views.comment_create_answer, name='comment_create_answer'),
+    path('comment/modify/answer/<int:comment_id>/', comment_answer_views.comment_modify_answer, name='comment_modify_answer'),
+    path('comment/delete/answer/<int:comment_id>/', comment_answer_views.comment_delete_answer, name='comment_delete_answer'),
 
     # vote_views.py
     path('vote/question/<int:question_id>/', vote_views.vote_question, name='vote_question'),
