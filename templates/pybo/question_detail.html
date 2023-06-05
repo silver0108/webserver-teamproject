@@ -50,6 +50,7 @@
                     {% endif %}
                     <!-- 질문 댓글 Start -->
                     {% if question.comment_set.count > 0 %}
+                    <!-- 정렬 -->
                     <div class="col-2" style="margin-left: auto; margin-top: 50px;">
                         <select class="form-control so">
                             <option value="recent" {% if so == 'recent' %}selected{% endif %}>최신순</option>
@@ -105,7 +106,7 @@
                     <!-- 이전페이지 -->
                     {% if comment_list.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" data-page="{{ comment_list.previous_page_number }}" href="#">이전</a>
+                        <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
                     </li>
                     {% else %}
                     <li class="page-item disabled">
