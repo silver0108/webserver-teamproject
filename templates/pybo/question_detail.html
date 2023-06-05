@@ -23,6 +23,12 @@
                 <div class="card-body">
                     <div class="card-text">{{ question.content|mark }}</div>
                     <div class="d-flex justify-content-end">
+                        {% if question.modify_count %}
+                        <div class="badge badge-light p-2 text-center">
+                            <div class="mb-2" style="color: orangered;">{{ question.modify_count }}번</div>
+                            <div>수정됨</div>
+                        </div>
+                        {% endif %}
                         {% if question.modify_date %}
                         <div class="badge badge-light p-2 text-left mx-3">
                             <div class="mb-2">modified at</div>
@@ -87,6 +93,49 @@
                     </div>
                     <!-- 질문 댓글 End -->
                 </div>
+            <!--@@@@@ 수정필요 @@@@@-->
+            <!-- 페이징처리 시작 -->
+            <ul class="pagination justify-content-center">
+                <!-- 처음페이지 -->
+                <li class="page-item">
+                    <a class="page-link" data-page="1" href="#">처음</a>
+                </li>
+                <!-- 이전페이지 -->
+                {% if comment_set.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" data-page="{{ comment_set.previous_page_number }}" href="#">이전</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                </li>
+                {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in comment_set.paginator.page_range %}
+                    {% if page_number >= comment_set.number|add:-4 and page_number <= comment_set.number|add:4 %}
+                        {% if page_number == comment_set.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                {% if comment_set.has_next %}
+                <li class="page-item">
+                    <a class="page-link" data-page="{{ comment_set.next_page_number }}" href="#">다음</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                </li>
+                {% endif %}
+            </ul>
+            <!-- 페이징처리 끝 -->
             </div>
         </div>
     </div>
@@ -104,6 +153,12 @@
                 <div class="card-body">
                     <div class="card-text">{{ answer.content|mark }}</div>
                     <div class="d-flex justify-content-end">
+                        {% if answer.modify_count %}
+                        <div class="badge badge-light p-2 text-center">
+                            <div class="mb-2" style="color: orangered;">{{ answer.modify_count }}번</div>
+                            <div>수정됨</div>
+                        </div>
+                        {% endif %}
                         {% if answer.modify_date %}
                         <div class="badge badge-light p-2 text-left mx-3">
                             <div class="mb-2">modified at</div>
