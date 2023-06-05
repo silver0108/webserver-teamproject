@@ -38,7 +38,7 @@ def vote_question_comment(request, comment_id):
     """
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user == comment.author:
-        messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
+        messages.error(request, '본인이 작성한 댓글은 추천할수 없습니다')
     else:
         comment.voter.add(request.user)
     return redirect('pybo:detail', question_id=comment.question.id)
@@ -50,7 +50,7 @@ def vote_answer_comment(request, comment_id):
     """
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user == comment.author:
-        messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
+        messages.error(request, '본인이 작성한 댓글은 추천할수 없습니다')
     else:
         comment.voter.add(request.user)
     return redirect('pybo:detail', question_id=comment.answer.question.id)
